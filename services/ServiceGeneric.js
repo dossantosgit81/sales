@@ -11,10 +11,20 @@ class ServiceGeneric {
         }
     }
 
-    async update(obj, table, conditional){
+    async update(obj, table, message){
+
         const field = await this.findByGeneric("*", {id: obj.id}, table);
 
-        
+        if(field != undefined){
+            try{            
+               const field = await Connection.update(obj).where({id: obj.id}).table(table);
+               return {status : true, field};
+            }catch(err){
+                return {status: false, err};
+            }
+        }else{
+            return {status: false, err: message};
+        }
 
     }
 

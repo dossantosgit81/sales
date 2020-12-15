@@ -12,30 +12,18 @@ module.exports = async function(req, res, next){
 
     if(findByEmail.status == 
         false && findByCpf.status == false && findByRg.status == false && findByCelphone.status == false){
-
-            
+           
             try{
                 await ClienteSchema.validate(req.body)
                      next();
              }catch(err){
                  res.status(400);
-                 res.send(err); 
+                 
+                 err.errors.forEach(erro => {
+                     res.send(erro);
+                }); 
              }
 
-            // try{
-            //    if(await ClienteSchema.validate(req.body).errors.length > 0){
-            //        errors.forEach(element => {
-            //            res.send(element);
-            //        });
-            //        res.status(400);
-
-            //     }else{
-            //         next();
-            //     }   
-                
-            // }catch(err){
-            //     console.log()    
-            // }
     } 
      
     if(findByEmail.status){
