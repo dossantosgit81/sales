@@ -9,11 +9,9 @@ class ClientController{
 
         try{     
             await new ServiceGeneric().save(new Client(name, rg, cpf, email, telephone, celphone, cep, address, number, complement, neighborhood, city, state), "client");
-            res.status(200);
-            res.send("Usuario cadastrado com sucesso!!!");
+            res.status(200).json({message : "Usuario cadastrado com sucesso!!!"});
         }catch(err){
-            res.status(406);
-            res.send("Erro de validação");
+            res.status(406).json({message : "Erro de validação"});
             console.log(err);
         }
 
@@ -25,22 +23,30 @@ class ClientController{
             const result = await new ServiceGeneric().update(req.body, "client", "Erro ao atualizar os dados");
             if(result != undefined){
                 if(result.status){
-                    res.status(200);
-                    res.send("Tudo OK!");
+                    res.json({message: "Tudo OK!"})
                 }else{
-                    res.status(406);
-                    res.send(result.err);
+                    res.status(406).json(result.err);
                 }
             }else{
-                res.status(406);
-                res.send("Ocorreu um erro no servidor!");
+                res.status(406).json({message: "Ocorreu um erro no servidor!"});
             }
         }catch(err){
-            console.log("Falha na atualização");
+            console.log(err);
         }
 
     }
 
+    async index(req, res){
+        const SeviceObject = new ServiceGeneric();
+
+        const users = await SeviceObject.findAll(["id", "name", "cpf", "rg", "email", "state", "city", "address"], "client");
+        if(users.status == true){
+            res.json(users);
+        }else{
+            console.log(users.err);
+            res.status(406).json(users.err);
+        }
+    }
 
 }
 

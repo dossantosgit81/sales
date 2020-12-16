@@ -44,6 +44,17 @@ class ServiceGeneric {
       
     }
 
+    async findAll(fields, table){
+        try{
+            const result = await Connection.select(fields).table(table);
+            return {status: true, result};
+        }catch(err){
+            return {status: false, err};
+        }
+    } 
+
+    
+
 }
 
 module.exports = ServiceGeneric;
