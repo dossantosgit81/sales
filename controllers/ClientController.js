@@ -48,6 +48,21 @@ class ClientController{
         }
     }
 
+    async remove(req, res){
+        const id = req.params.id;
+
+        const userDelete = await new ServiceGeneric().delete("*", {id : id}, "client");
+
+        if(userDelete.status){
+            res.status(200).json({message: "Usuario deletado com sucesso"});
+        }else if(!userDelete.status){
+            res.status(406).json({message: "Usuario não encontrado"});
+        }else{
+            res.status(403).json({message: "Error desconhecido"})
+        }
+
+    }
+
 }
 
 module.exports = new ClientController();

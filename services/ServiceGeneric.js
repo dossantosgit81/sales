@@ -51,9 +51,22 @@ class ServiceGeneric {
         }catch(err){
             return {status: false, err};
         }
-    } 
+    }
 
-    
+    async delete(select, findobject, table){
+        try{
+            const user = await this.findByGeneric(select, findobject, table);
+            if(user.status){
+                await Connection.delete().where(findobject).table(table);
+                return {status: true};
+            }else{
+                return {status: false};
+            }
+        }catch(err){
+            console.log(err);
+        }
+
+    }    
 
 }
 
