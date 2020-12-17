@@ -6,8 +6,9 @@ class ServiceGeneric {
 
         try{
             await Connection.insert(Obj).table(table);
+            return {status: true};
         }catch(err){
-            console.log("Erro na inserção " + err);
+            return {status: false, err};
         }
     }
 
@@ -20,7 +21,7 @@ class ServiceGeneric {
                const field = await Connection.update(obj).where({id: obj.id}).table(table);
                return {status : true, field};
             }catch(err){
-                return {status: false, err};
+                return {status: false};
             }
         }else{
             return {status: false, err: message};
