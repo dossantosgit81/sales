@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require("express");
 //const app = express();
 const router = express.Router();
 const ClientController = require("../controllers/ClientController");
@@ -10,8 +10,10 @@ router.post("/client", FieldValidateCreate ,ClientController.create);
 router.put("/client" , FieldValidateUpdate, ClientController.update);
 router.get("/index", ClientController.index);
 router.delete("/client/:id", ClientController.remove);
+
 router.post("/employee", FieldValidateCreate ,EmployeeController.new);
 router.put("/employee", FieldValidateUpdate ,EmployeeController.update);
-
+router.get("/employees", EmployeeController.readAll);
+router.delete("/employee/:id", EmployeeController.remove);
 
 module.exports = router;

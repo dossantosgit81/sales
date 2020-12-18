@@ -1,10 +1,11 @@
 const Client = require("../models/Client");
 const ServiceGeneric = require("../services/ServiceGeneric");
 
+
 class ClientController{
 
     async create(req, res){
-        
+        //console.log(await tableClient);
         const {name, rg, cpf, email, telephone, celphone, cep, address, number, complement, neighborhood, city, state} = req.body;
 
         try{     

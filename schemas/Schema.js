@@ -1,6 +1,6 @@
 const Yup = require("yup");
 
-const ClienteSchema = Yup.object().shape({
+const Schema = Yup.object().shape({
     name:  Yup.string().required("Nome requerido"),
     email: Yup.string().email("Email invalido").required("Email requerido"),
     cpf: Yup.string().length(14, "CPF tem conter 14 caracteres").required("CPF requerido"),
@@ -8,4 +8,4 @@ const ClienteSchema = Yup.object().shape({
     celphone: Yup.number().required("Telefone celular requerido").positive("Digite números postivos por favor").integer("Só aceitamos números inteiros") 
 });
 
-module.exports = ClienteSchema;
+module.exports = Schema;

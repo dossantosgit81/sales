@@ -22,9 +22,14 @@ class EmployeeController{
 
      async update(req, res){
         //Passa um objeto descontruido dos dados que vc quer que seja atualizado, no caso não podemos atualizar a senha como atualizamos o email
+        const {id, name, rg, cpf, email, telephone, celphone, cep, address, number, complement, neighborhood, city, state, office, access_level} = req.body;
+        const objectUpdate = {id, name, rg, cpf, email, telephone,
+             celphone, cep, address, number, 
+            complement, neighborhood, city, state, office, access_level};
+       
         try{
 
-            const result = await new ServiceGeneric().update(req.body, "employee", "Erro ao atualizar!");
+            const result = await new ServiceGeneric().update(objectUpdate, "employee", "Erro ao atualizar!");
             if(result.status){
                 res.status(200).json({message: "Usuario atualizado com sucesso"});
             }else{
@@ -39,13 +44,34 @@ class EmployeeController{
 
      }
 
-    // async delete(req, res){
+    async remove(req, res){
+        const id = req.params.id;
 
-    // }
+        const userDelete = await new ServiceGeneric().delete("*", {id: id}, "employee");
 
-    // async read(req, res){
+        if(userDelete.status){
+            res.status(200).json({message: "Usuario deletado com sucesso"});
 
-    // }
+        }else if(!userDelete.status){
+            res.status(406).json({message: "Usuario não encontrado"});
+
+        }else{
+            res.status(403).json({message: "Error desconhecido"});
+        
+        }
+    }
+
+    async readAll(req, res){
+        const users = await new ServiceGeneric().findAll(["id", "name", "cpf", "rg", "email", "state", "city", "address", "office", "access_level"], "employee");
+
+        if(users.status){
+            res.json(users).status(200);
+        }else{
+            res.json({message: "Erro interno no servidor"});
+            console.log(" Error, trate" + users.err);
+        }
+
+    }
 
 }
 
