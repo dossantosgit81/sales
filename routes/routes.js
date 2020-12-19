@@ -21,7 +21,7 @@ router.get("/employees", EmployeeController.readAll);
 router.delete("/employee/:id", EmployeeController.remove);
 
 router.post("/provider", FieldValidateCreate , ProviderController.create);
-router.put("/provider", ProviderController.update);
+router.put("/provider", FieldValidateUpdate , ProviderController.update);
 router.delete("/provider/:id", ProviderController.remove);
 router.get("/provider", ProviderController.index);
 
