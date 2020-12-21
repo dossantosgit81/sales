@@ -1,10 +1,10 @@
 const express = require("express");
-const app = express();
 const router = express.Router();
 
 const ClientController = require("../controllers/ClientController");
 const EmployeeController = require("../controllers/EmployeeController");
 const ProviderController = require("../controllers/ProviderController");
+const ProductController = require("../controllers/ProductController");
 
 const FieldValidateCreate = require("../middlewares/FieldValidateCreate");
 const FieldValidateUpdate = require("../middlewares/FieldValidateUpdate");
@@ -24,5 +24,10 @@ router.post("/provider", FieldValidateCreate , ProviderController.create);
 router.put("/provider", FieldValidateUpdate , ProviderController.update);
 router.delete("/provider/:id", ProviderController.remove);
 router.get("/provider", ProviderController.index);
+
+router.post("/product", ProductController.create);
+router.put("/product", ProductController.update);
+router.get("/products", ProductController.index);
+router.delete("/product/:id", ProductController.remove);
 
 module.exports = router;

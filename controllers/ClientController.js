@@ -56,8 +56,10 @@ class ClientController{
 
         if(userDelete.status){
             res.status(200).json({message: "Usuario deletado com sucesso"});
+
         }else if(!userDelete.status){
             res.status(406).json({message: "Usuario não encontrado"});
+            
         }else{
             res.status(403).json({message: "Error desconhecido"})
         }

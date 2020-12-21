@@ -21,7 +21,7 @@ class ServiceGeneric {
                const field = await Connection.update(obj).where({id: obj.id}).table(table);
                return {status : true, field};
             }catch(err){
-                return {status: false};
+                return {status: false, err};
             }
         }else{
             return {status: false, err: message};
