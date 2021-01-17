@@ -5,6 +5,8 @@ const ClientController = require("../controllers/ClientController");
 const EmployeeController = require("../controllers/EmployeeController");
 const ProviderController = require("../controllers/ProviderController");
 const ProductController = require("../controllers/ProductController");
+const SaleController = require("../controllers/SaleController");
+const ItemsSaleController = require("../controllers/ItemsSaleController");
 
 const FieldValidateCreate = require("../middlewares/FieldValidateCreate");
 const FieldValidateUpdate = require("../middlewares/FieldValidateUpdate");
@@ -29,5 +31,11 @@ router.post("/product", ProductController.create);
 router.put("/product", ProductController.update);
 router.get("/products", ProductController.index);
 router.delete("/product/:id", ProductController.remove);
+router.post("/find", ProductController.findById);
+
+router.post("/sale", SaleController.create);
+router.post("/search", SaleController.findByCpf);
+router.get("/lastid", ItemsSaleController.lastSale);
+router.post("/cart", ItemsSaleController.create);
 
 module.exports = router;

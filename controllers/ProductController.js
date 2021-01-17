@@ -5,6 +5,7 @@ const ProductService = require("../services/ProductService");
 class ProductController {
 
     async create (req, res){
+
         const {description, price, quantity_stock, provider_id} = req.body;
         const ProductObj = new Product(description, price, quantity_stock, provider_id);
         const saveObj = await new ServiceGeneric().save(ProductObj, "product");
@@ -34,7 +35,7 @@ class ProductController {
     }
 
     async index(req, res){
-
+        
         const result = await ProductService.findAll();
 
         if(result.status){
@@ -56,6 +57,18 @@ class ProductController {
             res.status(406).json({message: "Produto não encontrado"});
         }else{
             res.status(403).json({message: "Error desconhecido"})
+        }
+
+    }
+
+    async findById(req, res){
+
+        const id = req.body.id;
+        const obj = await new ServiceGeneric().findByGeneric("*", {id : id}, "product");
+        if(obj.status){
+           res.json(obj.result);
+        }else{
+            res.status(404).json("Usuario não encontrado");
         }
 
     }
