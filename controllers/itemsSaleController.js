@@ -20,7 +20,7 @@ class ItemsSaleController {
 	async lastSale(req, res){
 
     	const idSale =  await new SaleService().returnLastSale();
-    	res.status(200).json(idSale);
+    	res.status(200).json({idSale});
        
 	}
 }

@@ -17,7 +17,7 @@ class SaleController {
         
         const result = await new ServiceGeneric().save(SaleObj, "sales");
         if(result.status){
-            res.status(200);
+            res.status(200).json("cadastro");
         }else{
             console.log(result.err);
             res.status(404).json("Não conseguimos concluir a operação");

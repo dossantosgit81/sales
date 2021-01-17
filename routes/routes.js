@@ -33,7 +33,7 @@ router.get("/products", ProductController.index);
 router.delete("/product/:id", ProductController.remove);
 router.post("/find", ProductController.findById);
 
-router.post("/sale", SaleController.create);
+router.post("/sales", SaleController.create);
 router.post("/search", SaleController.findByCpf);
 router.get("/lastid", ItemsSaleController.lastSale);
 router.post("/cart", ItemsSaleController.create);
