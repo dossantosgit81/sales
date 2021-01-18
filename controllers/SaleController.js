@@ -32,6 +32,16 @@ class SaleController {
         }
     }
 
+   async findSalesDateInitFinal(req, res){
+       const {date_init, date_final} = req.body;
+       const result = await new SaleService().findSalesDateInitFinal(date_init, date_final);
+       if(result.status){
+           res.status(200).json(result.fields);
+       }else{
+           res.status(404).json(result.err);
+       }
+   }
+
 }
 
 module.exports = new SaleController();
