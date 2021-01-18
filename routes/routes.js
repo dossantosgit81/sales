@@ -33,6 +33,9 @@ router.get("/products", ProductController.index);
 router.delete("/product/:id", ProductController.remove);
 router.post("/find", ProductController.findById);
 
+router.put("/stock", ProductController.lowStock);
+router.get("/stock/:id", ProductController.returnStockCurrent);
+
 router.post("/sales", SaleController.create);
 router.post("/search", SaleController.findByCpf);
 router.get("/lastid", ItemsSaleController.lastSale);

@@ -24,6 +24,28 @@ class ProductService{
 
     }
 
+    async lowStock(id, qtd_new){
+
+        try{
+            await Connection.update({quantity_stock: qtd_new}).where({id: id}).table("product");
+            return {status: true};
+        }catch(err){
+            return {status: false, err};
+        }
+
+    }
+
+    async returnStockCurrent(id){
+        
+        try{
+            const result = await Connection.select("quantity_stock").where({id:id}).table("product");
+            return {status: true, result};
+        }catch(err){
+            return {status: false, err};
+        }
+
+    }
+
 }
 
 module.exports = new ProductService();

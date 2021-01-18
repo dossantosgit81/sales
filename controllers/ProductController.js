@@ -73,6 +73,31 @@ class ProductController {
 
     }
 
+    async lowStock(req, res){
+        const {id, qtd_new} = req.body;
+        const result = await ProductService.lowStock(id, qtd_new);
+        console.log(result);
+        if(result.status){
+            res.status(200);
+            console.log("Quantidade atualizado com sucesso");
+        }else{
+            result.status(404);
+            console.log(result.err);
+        }
+    }
+
+    async returnStockCurrent(req, res){
+        const {id} = req.params;
+        const result = await ProductService.returnStockCurrent(id);
+        console.log(result.result[0].quantity_stock);
+        if(result.status){
+            res.status(200).send(result);
+        }else{
+            res.status(404);
+            console.log(result.err);
+        }
+    }
+
 }
 
 module.exports = new ProductController();
