@@ -12,6 +12,7 @@ const FieldValidateCreate = require("../middlewares/FieldValidateCreate");
 const FieldValidateUpdate = require("../middlewares/FieldValidateUpdate");
 
 
+
 router.post("/client", FieldValidateCreate ,ClientController.create);
 router.put("/client" , FieldValidateUpdate, ClientController.update);
 router.get("/client", ClientController.index);
@@ -42,5 +43,7 @@ router.post("/search/sales/period", SaleController.findSalesDateInitFinal);
 router.post("/search", SaleController.findByCpf);
 router.get("/lastid", ItemsSaleController.lastSale);
 router.post("/cart", ItemsSaleController.create);
+
+router.get("/detail/sale/:id", ItemsSaleController.findItemsSales);
 
 module.exports = router;

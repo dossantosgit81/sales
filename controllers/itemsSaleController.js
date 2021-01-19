@@ -1,6 +1,8 @@
 const ServiceGeneric = require("../services/ServiceGeneric");
 const SaleService = require("../services/SaleService");
 const Items_sales = require("../models/Items_sales");
+const ItemsSalesService = require('../services/ItemsSalesServices');
+
 
 class ItemsSaleController {
 
@@ -22,6 +24,18 @@ class ItemsSaleController {
     	const idSale =  await new SaleService().returnLastSale();
     	res.status(200).json({idSale});
        
+	}
+
+	async findItemsSales(req, res){
+		const {id} = req.params;
+		const result = await new ItemsSalesService().findItemsSales(id);
+		if(result.status){
+			res.status(200).json(result.fields);
+		}else{
+			console.log(result.err);
+			res.status(404).json("Erro ao listar os detalhes da venda");
+		}
+
 	}
 }
 
