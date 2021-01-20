@@ -12,6 +12,7 @@ class ItemsSalesService {
                "p.description",
                "i.qtd",
                "p.price",
+               "p.id",
                "i.subtotal"
            ])
            .table("items_sales as i")

@@ -42,6 +42,16 @@ class SaleController {
        }
    }
 
+   async totalSaleDate(req, res){
+       const {date} = req.body;
+      const result = await new SaleService().totalSaleDate(date);
+      if(result.status){
+        res.status(200).json(result);
+      }else{
+        res.status(404).json(result.err);
+      }
+   }
+
 }
 
 module.exports = new SaleController();
