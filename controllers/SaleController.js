@@ -42,6 +42,17 @@ class SaleController {
        }
    }
 
+   async findSalesDateInitFinalTeste(req, res){
+    const {date_init, date_final} = req.body;
+    const result = await new SaleService().findSalesDateInitFinalTeste(date_init, date_final);
+    console.log(result);
+    if(result.status){
+        res.status(200).json(result.arr);
+    }else{
+        res.status(404).json(result.err);
+    }
+}
+
    async totalSaleDate(req, res){
        const {date} = req.body;
       const result = await new SaleService().totalSaleDate(date);

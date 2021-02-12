@@ -39,6 +39,7 @@ router.get("/stock/:id", ProductController.returnStockCurrent);
 
 router.post("/sales", SaleController.create);
 router.post("/search/sales/period", SaleController.findSalesDateInitFinal);
+router.post("/teste", SaleController.findSalesDateInitFinalTeste);
 router.post("/total/date", SaleController.totalSaleDate);
 
 router.post("/search", SaleController.findByCpf);

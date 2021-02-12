@@ -49,7 +49,6 @@ class ProductController {
 
     async remove(req, res){
         const id = req.params.id;
-
         const productDelete = await new ServiceGeneric().delete("*", {id : id}, "product");
         if(productDelete.status){
             res.status(200).json({message: "Produto deletado com sucesso"});
@@ -78,11 +77,9 @@ class ProductController {
         const result = await ProductService.lowStock(id, qtd_new);
         console.log(result);
         if(result.status){
-            res.status(200);
-            console.log("Quantidade atualizado com sucesso");
+            res.status(200).json("Produto atualizado");
         }else{
-            result.status(404);
-            console.log(result.err);
+            result.status(404).json("Erro interno");
         }
     }
 
@@ -91,7 +88,7 @@ class ProductController {
         const result = await ProductService.returnStockCurrent(id);
         console.log(result.result[0].quantity_stock);
         if(result.status){
-            res.status(200).send(result);
+            res.status(200).json(result.result[0].quantity_stock);
         }else{
             res.status(404);
             console.log(result.err);

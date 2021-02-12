@@ -15,7 +15,7 @@ class ProductService{
                     "provider.name as fornecedor",
                     "provider.id as id_fornecedor"
                 ]).table("product")
-            .innerJoin("provider", "product.provider_id", "provider.id");
+            .innerJoin("provider", "product.for_id", "provider.id");
 
             return {status : true, products};
         }catch(err){

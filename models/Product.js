@@ -7,7 +7,7 @@ class Product {
         this.description = description;
         this.price = price;
         this.quantity_stock = quantity_stock;
-        this.provider_id = provider_id;
+        this.for_id = provider_id;
 
     }
 
